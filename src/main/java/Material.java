@@ -1,5 +1,3 @@
-package clasesprincipales;
-
 // por ahora sera un enum de materiales
 
 public enum Material {
