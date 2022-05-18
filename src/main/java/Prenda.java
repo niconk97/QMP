@@ -6,12 +6,14 @@ public class Prenda {
     private Material material; //no nulo
     private Color colorPrincipal; //no nulo
     private Color colorSecundario; //puede ser nulo
+    private Trama trama;
 
-    public Prenda(TipoPrenda tipoPrenda, Material material, Color colorPrincipal, Color colorSecundario){
+    public Prenda(TipoPrenda tipoPrenda, Material material, Color colorPrincipal, Color colorSecundario, Trama trama){
         this.validarPrenda(tipoPrenda, material, colorPrincipal);
         this.material = material;
         this.colorPrincipal = colorPrincipal;
         this.colorSecundario = colorSecundario;
+        this.trama = trama;
     }
 
     private void validarPrenda(TipoPrenda tipoPrenda, Material material, Color colorPrincipal){
@@ -23,4 +25,26 @@ public class Prenda {
     public boolean tieneColorSecundario(){
         return this.colorSecundario == null;
     }
-   }
+
+    public TipoPrenda getTipoPrenda() {
+        return tipoPrenda;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public Color getColorPrincipal() {
+        return colorPrincipal;
+    }
+
+    public Color getColorSecundario() {
+        return colorSecundario;
+    }
+
+    public Trama getTrama() {
+        return trama;
+    }
+}
+
+
