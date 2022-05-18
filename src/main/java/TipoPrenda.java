@@ -1,6 +1,6 @@
 public class TipoPrenda {
 
-  public Categoria categoria;
+  private Categoria categoria;
 
   public TipoPrenda(Categoria categoria) {
     this.categoria = categoria;

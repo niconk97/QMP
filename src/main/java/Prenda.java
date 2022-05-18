@@ -2,10 +2,10 @@ import static java.util.Objects.requireNonNull;
 
 public class Prenda {
 
-    public TipoPrenda tipoPrenda;
-    public Material material; //no nulo
-    public Color colorPrincipal; //no nulo
-    public Color colorSecundario; //puede ser nulo
+    private TipoPrenda tipoPrenda;
+    private Material material; //no nulo
+    private Color colorPrincipal; //no nulo
+    private Color colorSecundario; //puede ser nulo
 
     public Prenda(TipoPrenda tipoPrenda, Material material, Color colorPrincipal, Color colorSecundario){
         this.validarPrenda(tipoPrenda, material, colorPrincipal);

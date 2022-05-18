@@ -1,6 +1,6 @@
 public class Color {
 
-    public String codigoHexadecimal;
+    private String codigoHexadecimal;
 
     public Color(String codigoHexadecimal) {
         this.codigoHexadecimal = codigoHexadecimal;
