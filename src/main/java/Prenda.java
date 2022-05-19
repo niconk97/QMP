@@ -7,12 +7,14 @@ public class Prenda {
     private Color colorPrincipal;
     private Color colorSecundario;
     private Trama trama;
+    private Integer maximaTemperaturaTolerada;
 
-    public Prenda(TipoPrenda tipoPrenda, Material material, Color colorPrincipal, Color colorSecundario, Trama trama){
+    public Prenda(TipoPrenda tipoPrenda, Material material, Color colorPrincipal, Color colorSecundario, Trama trama, Integer maximaTemperaturaTolerada){
         this.material = material;
         this.colorPrincipal = colorPrincipal;
         this.colorSecundario = colorSecundario;
         this.trama = trama;
+        this.maximaTemperaturaTolerada = maximaTemperaturaTolerada;
     }
 
     public boolean tieneColorSecundario(){
@@ -37,6 +39,10 @@ public class Prenda {
 
     public Trama getTrama() {
         return trama;
+    }
+
+    public Integer getMaximaTemperaturaTolerada() {
+        return maximaTemperaturaTolerada;
     }
 }
 

@@ -6,6 +6,7 @@ public class Borrador {
   private Color colorPrincipal; //no nulo
   private Color colorSecundario; //puede ser nulo
   private Trama trama = Trama.LISA;
+  private Integer maximaTemperaturaTolerada;
 
   public Borrador(TipoPrenda tipoPrenda) {
     requireNonNull(tipoPrenda, "El tipo de la prenda no puede ser nulo");
@@ -31,8 +32,12 @@ public class Borrador {
       this.trama = trama;
   }
 
+  public void especificarMaximaTemperaturaTolerada(Integer maximaTemperaturaTolerada){
+    this.maximaTemperaturaTolerada = maximaTemperaturaTolerada;
+  }
+
   public Prenda crearPrenda(){
-    return new Prenda(tipoPrenda, material, colorPrincipal, colorSecundario, trama);
+    return new Prenda(tipoPrenda, material, colorPrincipal, colorSecundario, trama, maximaTemperaturaTolerada);
   }
 
 }
