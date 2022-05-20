@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class GestorClima {
   private ServicioClima servicioClima;
-  private List<PropiedadClima> consultasAnteriores = new ArrayList<>(); //Se guardan las condiciones para no consultar constantemente al servicio
+  private List<Clima> consultasAnteriores = new ArrayList<>(); //Se guardan los climas para no consultar constantemente al servicio
   private LocalDateTime momentoDeUltimaRespuesta;
 
   public GestorClima() {
@@ -21,43 +21,44 @@ public class GestorClima {
   }
 
   public PropiedadClima porcentajePrecipitacionDeLocalizacion(String localizacion){
-    return this.servicioClima.porcentajePrecipitacionDeLocalizacion(localizacion);
+    Clima clima = this.servicioClima.condicionesDeLocalizacion(localizacion);
+    return clima.getPrecipitaciones();
   }
 
   public PropiedadClima temperaturaDeLocalizacion(String localizacion){
-    return this.servicioClima.temperaturaDeLocalizacion(localizacion);
+    Clima clima = this.servicioClima.condicionesDeLocalizacion(localizacion);
+    return clima.getTemperatura();
   }
 
-  public List<PropiedadClima> consultarCondicionesClimaticas(String localizacion, LocalDateTime momento){
-    if(pasaronMasDeDoceHoras(momento)){
-      nuevaConsulta(localizacion);
+  public Clima consultarCondicionesClimaticas(String localizacion){
+    if(pasaronMasDeDoceHoras(momentoDeUltimaRespuesta)){
+      return nuevaConsulta(localizacion);
     }else{
-      List<PropiedadClima> condicionesCercanasAlMomentoDado = filtrarPorMomento(this.consultasAnteriores, momento);
-      List<PropiedadClima> condicionesDeLocalizacion = filtrarPorLocalizacion(condicionesCercanasAlMomentoDado, localizacion);
-      return condicionesDeLocalizacion;
+      List<Clima> climasCercanasAlMomentoDado = filtrarPorMomento(this.consultasAnteriores, momentoDeUltimaRespuesta);
+      List<Clima> climasDeLocalizacion = filtrarPorLocalizacion(climasCercanasAlMomentoDado, localizacion);
+      return climasDeLocalizacion.get(0);
     }
-
   }
 
   private Boolean pasaronMasDeDoceHoras(LocalDateTime momento) {
-    return true; // validar tempo que paso
+    return true; // Faltaria validar si pasaron doce horas desde el ultimo momento que se ejecuto la consulta al servicio del clima
   }
 
-  private List<PropiedadClima> filtrarPorMomento(List<PropiedadClima> consultas, LocalDateTime momento) {
-    return consultas.stream().filter(consulta -> consulta.getMomento().isEqual(momento)).collect(Collectors.toList());
+  private List<Clima> filtrarPorMomento(List<Clima> climas, LocalDateTime momento) {
+    return climas.stream().filter(clima -> clima.getMomento().isEqual(momento)).collect(Collectors.toList());
   }
 
-  private List<PropiedadClima> filtrarPorLocalizacion(List<PropiedadClima> consultas, String localizacion) {
-    return consultas.stream().filter(consulta -> consulta.getLocalizacionAsociada().equals(localizacion)).collect(Collectors.toList());
+  private List<Clima> filtrarPorLocalizacion(List<Clima> climas, String localizacion) {
+    return climas.stream().filter(clima -> clima.getLocalizacionAsociada().equals(localizacion)).collect(Collectors.toList());
   }
 
-  public List<PropiedadClima> nuevaConsulta(String localizacion){
+  public Clima nuevaConsulta(String localizacion){
     PropiedadClima precipitaciones = porcentajePrecipitacionDeLocalizacion(localizacion);
     PropiedadClima temperatura = temperaturaDeLocalizacion(localizacion);
-    consultasAnteriores.add(precipitaciones);
-    consultasAnteriores.add(temperatura);
-    this.momentoDeUltimaRespuesta = temperatura.getMomento();
-    return consultarCondicionesClimaticas(localizacion, temperatura.getMomento());
+    Clima clima = this.servicioClima.condicionesDeLocalizacion(localizacion);
+    consultasAnteriores.add(clima);
+    this.momentoDeUltimaRespuesta = clima.getMomento();
+    return clima;
   }
 
 
