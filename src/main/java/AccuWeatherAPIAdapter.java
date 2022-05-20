@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class AccuWeatherAPIAdapter implements ServicioClima{
 
-  AccuWeatherAPI accuWeatherAPI = new AccuWeatherAPI();
+  private AccuWeatherAPI accuWeatherAPI = new AccuWeatherAPI();
 
   @Override
   public PropiedadClima porcentajePrecipitacionDeLocalizacion(String localizacion) {

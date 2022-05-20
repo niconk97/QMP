@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class SugerenteAtuendos {
 
-  List<Prenda> prendas = new ArrayList<>();
+  private List<Prenda> prendas = new ArrayList<>();
 
   public SugerenteAtuendos(List<Prenda> prendas) {
     this.prendas = prendas;

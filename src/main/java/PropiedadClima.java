@@ -6,8 +6,6 @@ public class PropiedadClima {
   private String unidad;
   private Integer valor;
 
-
-
   public PropiedadClima(NombrePropiedad nombrePropiedad, String unidad, Integer valor) {
     this.nombrePropiedad = nombrePropiedad;
     this.unidad = unidad;
