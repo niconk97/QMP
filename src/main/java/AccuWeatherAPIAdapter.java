@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -16,10 +15,10 @@ public class AccuWeatherAPIAdapter implements ServicioClima{
 
   @Override
   public PropiedadClima temperaturaDeLocalizacion(String localizacion) {
-    List<Map<String, Object>> condicionesClima = accuWeatherAPI.getWeather(localizacion);
-    Object temperatura = condicionesClima.get(0).get("Temperature");
-    //Faltaria adaptar el valor de la temperatura para que me devuelva un Integer y se cree la temperatura.
-    return new PropiedadClima(NombrePropiedad.TEMPERATURA,"°C",17);
+    Map<String, Object> temperatura = (Map<String, Object>) accuWeatherAPI.getWeather(localizacion).get(0).get("Temperature");
+    Integer valorTemperatura = (Integer) temperatura.get("Value");
+    String unidadTemperatura = (String) temperatura.get("Unit");
+    return new PropiedadClima(NombrePropiedad.TEMPERATURA,unidadTemperatura,valorTemperatura);
   }
 
   @Override

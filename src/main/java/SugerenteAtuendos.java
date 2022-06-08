@@ -1,6 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class SugerenteAtuendos {
@@ -30,12 +30,23 @@ public class SugerenteAtuendos {
   }
 
   public Atuendo armarAtuendo(List<Prenda> superiores, List<Prenda> inferiores, List<Prenda> calzados, List<Prenda> accesorios){
-    Prenda accesorioAleatorio = accesorios.get(ThreadLocalRandom.current().nextInt(0,accesorios.size()));
-    Prenda inferiorAleatorio = inferiores.get(ThreadLocalRandom.current().nextInt(0,inferiores.size()));
-    Prenda superiorAleatorio= superiores.get(ThreadLocalRandom.current().nextInt(0,superiores.size()));
-    Prenda calzadoAleatorio = calzados.get(ThreadLocalRandom.current().nextInt(0,calzados.size()));
+    Prenda accesorioAleatorio = accesorios.stream().findAny().orElse(null);
+    Prenda inferiorAleatorio = inferiores.stream().findAny().orElse(null);
+    Prenda superiorAleatorio= superiores.stream().findAny().orElse(null);;
+    Prenda calzadoAleatorio = calzados.stream().findAny().orElse(null);
+
+    validarPrendas(accesorioAleatorio, inferiorAleatorio, superiorAleatorio, calzadoAleatorio);
+
     return new Atuendo(superiorAleatorio, inferiorAleatorio, calzadoAleatorio, accesorioAleatorio);
   }
 
+  private void validarPrendas(Prenda accesorioAleatorio, Prenda ... otrasPrendas) {
+    List<Prenda> prendasDeAtuendo = new ArrayList<>();
+    prendasDeAtuendo.add(accesorioAleatorio);
+    Collections.addAll(prendasDeAtuendo, otrasPrendas);
 
+    if(prendasDeAtuendo.contains(null)){
+      throw new NoExistenPrendasParaTemperaturaActualException("No se pudo encontrar un atuendo acorde a la temperatura actual");
+    }
+  }
 }

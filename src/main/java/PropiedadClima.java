@@ -1,6 +1,3 @@
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 public class PropiedadClima {
   private NombrePropiedad nombrePropiedad;
   private String unidad;

@@ -1,23 +1,22 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class GestorClima {
   private ServicioClima servicioClima;
   private List<Clima> consultasAnteriores = new ArrayList<>(); //Se guardan los climas para no consultar constantemente al servicio
   private LocalDateTime momentoDeUltimaRespuesta;
+  private Integer horasDeValidez;
 
-  public GestorClima() {
+  public GestorClima(Integer horasDeValidez) {
     this.servicioClima = new AccuWeatherAPIAdapter();
+    this.horasDeValidez = horasDeValidez;
   }
 
-  public GestorClima(ServicioClima servicioClima) {
+  public GestorClima(ServicioClima servicioClima, Integer horasDeValidez) {
     this.servicioClima = servicioClima;
+    this.horasDeValidez = horasDeValidez;
   }
 
   public PropiedadClima porcentajePrecipitacionDeLocalizacion(String localizacion){
@@ -31,7 +30,7 @@ public class GestorClima {
   }
 
   public Clima consultarCondicionesClimaticas(String localizacion){
-    if(pasaronMasDeDoceHoras(momentoDeUltimaRespuesta)){
+    if(pasaronMasDe(this.momentoDeUltimaRespuesta, this.horasDeValidez) || this.momentoDeUltimaRespuesta == null){
       return nuevaConsulta(localizacion);
     }else{
       List<Clima> climasCercanasAlMomentoDado = filtrarPorMomento(this.consultasAnteriores, momentoDeUltimaRespuesta);
@@ -40,8 +39,9 @@ public class GestorClima {
     }
   }
 
-  private Boolean pasaronMasDeDoceHoras(LocalDateTime momento) {
-    return true; // Faltaria validar si pasaron doce horas desde el ultimo momento que se ejecuto la consulta al servicio del clima
+  private Boolean pasaronMasDe(LocalDateTime momento, Integer horas) {
+    return true; //  Faltaria validar si se supera las horas de validez
+    // desde el ultimo momento que se ejecuto la consulta al servicio del clima
   }
 
   private List<Clima> filtrarPorMomento(List<Clima> climas, LocalDateTime momento) {
