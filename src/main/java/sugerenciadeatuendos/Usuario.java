@@ -7,7 +7,6 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 
 public class Usuario {
-
   private List<Guardarropa> guardarropas;
   private List<Propuesta> propuestasPendientes;
 
@@ -17,7 +16,6 @@ public class Usuario {
 
   public void compartirGuardarropaConUsuario(Usuario usuario, Guardarropa guardarropa){
     usuario.agregarGuardarropa(guardarropa);
-    guardarropa.agregarUsuario(usuario);
   }
 
   public void agregarGuardarropa(Guardarropa guardarropa) {
