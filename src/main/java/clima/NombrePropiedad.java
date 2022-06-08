@@ -1,3 +1,5 @@
+package clima;
+
 public enum NombrePropiedad {
   VELOCIDAD_VIENTO, PORCENTAJE_HUMEDAD, TEMPERATURA, PORCENTAJE_PRECIPITACIONES
 }

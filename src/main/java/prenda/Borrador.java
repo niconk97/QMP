@@ -1,3 +1,5 @@
+package prenda;
+
 import static java.util.Objects.requireNonNull;
 
 public class Borrador {

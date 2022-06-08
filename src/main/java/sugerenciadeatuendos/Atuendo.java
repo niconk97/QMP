@@ -1,3 +1,7 @@
+package sugerenciadeatuendos;
+
+import prenda.Prenda;
+
 public class Atuendo {
   private Prenda prendaSuperior;
   private Prenda prendaInferior;

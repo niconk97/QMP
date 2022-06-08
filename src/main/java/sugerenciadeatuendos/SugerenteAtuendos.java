@@ -1,3 +1,10 @@
+package sugerenciadeatuendos;
+
+import clima.GestorClima;
+import clima.PropiedadClima;
+import prenda.Categoria;
+import prenda.Prenda;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

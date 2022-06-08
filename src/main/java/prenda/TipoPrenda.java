@@ -1,3 +1,5 @@
+package prenda;
+
 public class TipoPrenda {
 
   private Categoria categoria;

@@ -1,3 +1,5 @@
+package clima;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +27,7 @@ public class AccuWeatherAPIAdapter implements ServicioClima{
   public Clima condicionesDeLocalizacion(String localizacion) {
     PropiedadClima temperatura = temperaturaDeLocalizacion(localizacion);
     PropiedadClima precipitacion = porcentajePrecipitacionDeLocalizacion(localizacion);
-    //No sabria como obtener la humedad y el viento de un clima a partir del AccuWeatherAPI
+    //No sabria como obtener la humedad y el viento de un clima a partir del clima.AccuWeatherAPI
     return new Clima(temperatura,null,precipitacion,null,localizacion,LocalDateTime.now());
   }
 

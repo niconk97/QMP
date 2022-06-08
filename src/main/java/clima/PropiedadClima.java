@@ -1,3 +1,5 @@
+package clima;
+
 public class PropiedadClima {
   private NombrePropiedad nombrePropiedad;
   private String unidad;
