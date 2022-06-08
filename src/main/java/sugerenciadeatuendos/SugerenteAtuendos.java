@@ -4,7 +4,6 @@ import clima.GestorClima;
 import clima.PropiedadClima;
 import prenda.Categoria;
 import prenda.Prenda;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,15 +11,20 @@ import java.util.stream.Collectors;
 
 public class SugerenteAtuendos {
 
-  private List<Prenda> prendas = new ArrayList<>();
+  private Criterio criterio;
+  private Guardarropa guardarropa;
 
-  public SugerenteAtuendos(List<Prenda> prendas) {
-    this.prendas = prendas;
+  public SugerenteAtuendos(Criterio criterio, Guardarropa guardarropa) {
+    if(!criterio.equals(guardarropa.getCriterio())){
+      throw new GuardarropaIncorrectoException("El guardarropa no tiene prendas acorde al criterio elegido");
+    }
+    this.criterio = criterio;
+    this.guardarropa = guardarropa;
   }
 
   public void sugerirAtuendo(GestorClima gestorClima, String localizacion){
     PropiedadClima temperatura = gestorClima.temperaturaDeLocalizacion(localizacion);
-    List<Prenda> prendasAdecuadas = filtrarPrendasSegunTemperatura(prendas, temperatura);
+    List<Prenda> prendasAdecuadas = filtrarPrendasSegunTemperatura(guardarropa.getPrendas(), temperatura);
     List<Prenda> prendasSuperiores = filtrarPrendasSegunCategoria(prendasAdecuadas, Categoria.PRENDA_SUPERIOR);
     List<Prenda> prendasInferiores = filtrarPrendasSegunCategoria(prendasAdecuadas, Categoria.PRENDA_INFERIOR);
     List<Prenda> calzados = filtrarPrendasSegunCategoria(prendasAdecuadas, Categoria.CALZADO);
@@ -56,4 +60,9 @@ public class SugerenteAtuendos {
       throw new NoExistenPrendasParaTemperaturaActualException("No se pudo encontrar un atuendo acorde a la temperatura actual");
     }
   }
+
+  public void cambiarCriterio(Criterio criterio){
+    this.criterio = criterio;
+  }
+
 }
