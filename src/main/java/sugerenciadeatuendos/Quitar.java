@@ -2,17 +2,12 @@ package sugerenciadeatuendos;
 
 import prenda.Prenda;
 
-public class Quitar implements Propuesta{
+public class Quitar extends Propuesta{
   private Prenda prenda;
   private Guardarropa guardarropa;
 
   public Quitar(Prenda prenda, Guardarropa guardarropa) {
-    this.prenda = prenda;
-    this.guardarropa = guardarropa;
-  }
-
-  public Prenda getPrenda() {
-    return prenda;
+    super(prenda, guardarropa);
   }
 
   @Override
@@ -21,7 +16,9 @@ public class Quitar implements Propuesta{
   }
 
   @Override
-  public Guardarropa getGuardarropa() {
-    return guardarropa;
+  public void deshacerEn(Usuario usuario) {
+    Propuesta agregarPendiente = new Agregar(this.prenda, this.guardarropa);
+    usuario.agregarPropuestaEnPendientes(agregarPendiente);
   }
+
 }
