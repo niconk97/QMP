@@ -1,5 +1,6 @@
 package sugerenciadeatuendos;
 
+import clima.GestorClima;
 import prenda.Prenda;
 
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 
 public class Usuario {
+  private Atuendo atuendoDelDia;
   private List<Guardarropa> guardarropas;
   private List<Propuesta> propuestasPendientes;
   private List<Propuesta> propuestasAceptadas;
@@ -79,4 +81,19 @@ public class Usuario {
     requireNonNull(guardarropaSeleccionado, "No se encontro el guardarropa");
     guardarropaSeleccionado.agregarPrenda(prenda);
   }
+
+  public void recibirSugerencia(SugerenteAtuendos sugerenteAtuendos) {
+    sugerenteAtuendos.cambiarCriterio(Criterio.ROPA_DIARIA);
+    sugerenteAtuendos.cambiarGuardarropa(this.guardarropas.stream().filter(g->g.getCriterio().equals(Criterio.ROPA_DIARIA)).findFirst().orElse(null));
+    if(sugerenteAtuendos.getGuardarropa() != null) {
+      this.atuendoDelDia = sugerenteAtuendos.sugerirAtuendo("Buenos Aires");
+    }else {
+      this.atuendoDelDia = null;
+    }
+  }
+
+  public List<AlertaMeteorologica> consultarAlertasMeteorologicas(GestorClima gestorClima, String localizacion){
+    return gestorClima.enviarAlertasMeteorologicas();
+  }
+
 }

@@ -13,23 +13,25 @@ public class SugerenteAtuendos {
 
   private Criterio criterio;
   private Guardarropa guardarropa;
+  private GestorClima gestorClima;
 
-  public SugerenteAtuendos(Criterio criterio, Guardarropa guardarropa) {
+  public SugerenteAtuendos(Criterio criterio, Guardarropa guardarropa, GestorClima gestorClima) {
     if(!criterio.equals(guardarropa.getCriterio())){
       throw new GuardarropaIncorrectoException("El guardarropa no tiene prendas acorde al criterio elegido");
     }
     this.criterio = criterio;
     this.guardarropa = guardarropa;
+    this.gestorClima = gestorClima;
   }
 
-  public void sugerirAtuendo(GestorClima gestorClima, String localizacion){
+  public Atuendo sugerirAtuendo(String localizacion){
     PropiedadClima temperatura = gestorClima.temperaturaDeLocalizacion(localizacion);
     List<Prenda> prendasAdecuadas = filtrarPrendasSegunTemperatura(guardarropa.getPrendas(), temperatura);
     List<Prenda> prendasSuperiores = filtrarPrendasSegunCategoria(prendasAdecuadas, Categoria.PRENDA_SUPERIOR);
     List<Prenda> prendasInferiores = filtrarPrendasSegunCategoria(prendasAdecuadas, Categoria.PRENDA_INFERIOR);
     List<Prenda> calzados = filtrarPrendasSegunCategoria(prendasAdecuadas, Categoria.CALZADO);
     List<Prenda> accesorios = filtrarPrendasSegunCategoria(prendasAdecuadas, Categoria.ACCESORIO);
-    armarAtuendo(prendasSuperiores, prendasInferiores, calzados, accesorios);
+    return armarAtuendo(prendasSuperiores, prendasInferiores, calzados, accesorios);
   }
 
   public List<Prenda> filtrarPrendasSegunTemperatura(List<Prenda> prendas, PropiedadClima temperatura) {
@@ -63,6 +65,18 @@ public class SugerenteAtuendos {
 
   public void cambiarCriterio(Criterio criterio){
     this.criterio = criterio;
+  }
+
+  public Guardarropa getGuardarropa() {
+    return guardarropa;
+  }
+
+  public Criterio getCriterio() {
+    return criterio;
+  }
+
+  public void cambiarGuardarropa(Guardarropa guardarropa) {
+    this.guardarropa = guardarropa;
   }
 
 }

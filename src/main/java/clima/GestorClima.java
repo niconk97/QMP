@@ -1,5 +1,7 @@
 package clima;
 
+import sugerenciadeatuendos.AlertaMeteorologica;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,7 @@ public class GestorClima {
   private List<Clima> consultasAnteriores = new ArrayList<>(); //Se guardan los climas para no consultar constantemente al servicio
   private LocalDateTime momentoDeUltimaRespuesta;
   private Integer horasDeValidez;
+  private List<AlertaMeteorologica> alertasMeteorologicas = new ArrayList<>();
 
   public GestorClima(Integer horasDeValidez) {
     this.servicioClima = new AccuWeatherAPIAdapter();
@@ -63,5 +66,24 @@ public class GestorClima {
     return clima;
   }
 
+  public List<AlertaMeteorologica> enviarAlertasMeteorologicas() {
+    return this.alertasMeteorologicas;
+  }
+
+  public List<AlertaMeteorologica> actualizarAlertasMeteorologicas(String localizacion) {
+    List<AlertaMeteorologica> alertas = this.servicioClima.alertasDeLocalizacion(localizacion);
+    ejecutarAccionesDeAlertas(alertas);
+    this.alertasMeteorologicas = alertas;
+    return alertas;
+  }
+
+  private void ejecutarAccionesDeAlertas(List<AlertaMeteorologica> alertasMeteorologicas) {
+
+    if(alertasMeteorologicas.contains(AlertaMeteorologica.TORMENTA)){
+      new AlertaTormenta().informar();
+    }else if (alertasMeteorologicas.contains(AlertaMeteorologica.GRANIZO)) {
+      new AlertaGranizo().informar();
+    }
+  }
 
 }

@@ -1,5 +1,7 @@
 package clima;
 
+import sugerenciadeatuendos.AlertaMeteorologica;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +31,13 @@ public class AccuWeatherAPIAdapter implements ServicioClima{
     PropiedadClima precipitacion = porcentajePrecipitacionDeLocalizacion(localizacion);
     //No sabria como obtener la humedad y el viento de un clima a partir del clima.AccuWeatherAPI
     return new Clima(temperatura,null,precipitacion,null,localizacion,LocalDateTime.now());
+  }
+
+  @Override
+  public List<AlertaMeteorologica> alertasDeLocalizacion(String localizacion) {
+    Map<String, List<String>> alertas = this.accuWeatherAPI.getAlerts(localizacion);
+    /* adaptar los strings a una lista de enums y retornarlo*/
+    return null;
   }
 
 
