@@ -1,5 +1,7 @@
 package sugerenciadeatuendos;
 
+import alertas.RegistroAlertas;
+
 import java.util.List;
 
 public class Empleado {

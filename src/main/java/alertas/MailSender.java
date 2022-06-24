@@ -1,4 +1,4 @@
-package sugerenciadeatuendos;
+package alertas;
 
 public class MailSender {
   public void send(String direccion, String mensaje){

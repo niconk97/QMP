@@ -1,9 +1,6 @@
 package clima;
 
-import sugerenciadeatuendos.AccionDeAlerta;
-import sugerenciadeatuendos.AlertaMeteorologica;
-import sugerenciadeatuendos.MailSender;
-import sugerenciadeatuendos.NotificationService;
+import alertas.AlertaMeteorologica;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

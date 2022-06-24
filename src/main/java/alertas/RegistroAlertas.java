@@ -1,4 +1,4 @@
-package sugerenciadeatuendos;
+package alertas;
 
 import clima.GestorClima;
 

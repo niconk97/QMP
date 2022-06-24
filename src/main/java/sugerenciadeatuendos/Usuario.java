@@ -1,6 +1,8 @@
 package sugerenciadeatuendos;
 
-import clima.GestorClima;
+import alertas.AccionDeAlerta;
+import alertas.AlertaMeteorologica;
+import alertas.RegistroAlertas;
 import prenda.Prenda;
 
 import java.util.List;
