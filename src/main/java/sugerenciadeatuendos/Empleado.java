@@ -19,8 +19,8 @@ public class Empleado {
     usuarios.forEach(u -> u.recibirSugerencia(sugerenteAtuendos));
   }
 
-  public void actualizarAlertas(GestorClima gestorClima, String loc){
-    gestorClima.actualizarAlertasMeteorologicas(loc);
+  public void actualizarAlertas(RegistroAlertas registroAlertas, String loc){
+    registroAlertas.actualizarAlertasMeteorologicas(loc);
     calcularSugerenciasDiarias();
   }
 

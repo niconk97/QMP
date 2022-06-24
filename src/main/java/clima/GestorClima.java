@@ -15,8 +15,7 @@ public class GestorClima {
   private List<Clima> consultasAnteriores = new ArrayList<>(); //Se guardan los climas para no consultar constantemente al servicio
   private LocalDateTime momentoDeUltimaRespuesta;
   private Integer horasDeValidez;
-  private List<AlertaMeteorologica> alertasMeteorologicas = new ArrayList<>();
-  private List<AccionDeAlerta> accionesDeAlertas = new ArrayList<>();
+
 
   public GestorClima(Integer horasDeValidez) {
     this.servicioClima = new AccuWeatherAPIAdapter();
@@ -70,18 +69,7 @@ public class GestorClima {
     return clima;
   }
 
-  public List<AlertaMeteorologica> enviarAlertasMeteorologicas() {
-    return this.alertasMeteorologicas;
-  }
-
-  public List<AlertaMeteorologica> actualizarAlertasMeteorologicas(String localizacion) {
-    List<AlertaMeteorologica> alertas = this.servicioClima.alertasDeLocalizacion(localizacion);
-    ejecutarAccionesDeAlertas(alertas);
-    this.alertasMeteorologicas = alertas;
-    return alertas;
-  }
-
-  private void ejecutarAccionesDeAlertas(List<AlertaMeteorologica> alertasMeteorologicas) {
-    this.accionesDeAlertas.forEach(a->a.realizarAccionPorAlerta(alertasMeteorologicas));
+  public List<AlertaMeteorologica> alertasDeLocalizacion(String localizacion) {
+    return this.servicioClima.alertasDeLocalizacion(localizacion);
   }
 }

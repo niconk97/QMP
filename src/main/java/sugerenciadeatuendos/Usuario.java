@@ -13,6 +13,7 @@ public class Usuario {
   private List<Guardarropa> guardarropas;
   private List<Propuesta> propuestasPendientes;
   private List<Propuesta> propuestasAceptadas;
+  private RegistroAlertas registroAlertas;
 
   public String getCorreoElectronico() {
     return correoElectronico;
@@ -102,8 +103,28 @@ public class Usuario {
     }
   }
 
-  public List<AlertaMeteorologica> consultarAlertasMeteorologicas(GestorClima gestorClima, String localizacion){
-    return gestorClima.enviarAlertasMeteorologicas();
+  public List<AlertaMeteorologica> consultarAlertasMeteorologicas(RegistroAlertas registroAlertas, String localizacion){
+    return registroAlertas.enviarAlertasMeteorologicas();
+  }
+
+  public List<Propuesta> getPropuestasPendientes() {
+    return propuestasPendientes;
+  }
+
+  public List<Propuesta> getPropuestasAceptadas() {
+    return propuestasAceptadas;
+  }
+
+  public RegistroAlertas getRegistroAlertas() {
+    return registroAlertas;
+  }
+
+  public void agregarAccionDeAlerta(AccionDeAlerta accion){
+    this.registroAlertas.agregarAccion(accion);
+  }
+
+  public void quitarAccionDeAlerta(AccionDeAlerta accion){
+    this.registroAlertas.quitarAccion(accion);
   }
 
 }
