@@ -3,6 +3,7 @@ package sugerenciadeatuendos;
 import clima.GestorClima;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Empleado {
 
@@ -19,8 +20,13 @@ public class Empleado {
   }
 
   public void actualizarAlertas(GestorClima gestorClima, String loc){
-    gestorClima.actualizarAlertasMeteorologicas(loc);
+    gestorClima.actualizarAlertasMeteorologicas(loc, obtenerCorreoElectronico(usuarios));
+    //gestorClima.recibirCorreos(obtenerCorreoElectronico(usuarios));
     calcularSugerenciasDiarias();
+  }
+
+  public List<String> obtenerCorreoElectronico(List<Usuario> usuarios){
+    return usuarios.stream().map(u -> u.getCorreoElectronico()).collect(Collectors.toList());
   }
 
 }

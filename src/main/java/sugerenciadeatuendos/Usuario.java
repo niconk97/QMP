@@ -8,12 +8,22 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 
 public class Usuario {
+  private String correoElectronico;
   private Atuendo atuendoDelDia;
   private List<Guardarropa> guardarropas;
   private List<Propuesta> propuestasPendientes;
   private List<Propuesta> propuestasAceptadas;
 
-  public Usuario(List<Guardarropa> guardarropas) {
+  public String getCorreoElectronico() {
+    return correoElectronico;
+  }
+
+  public Atuendo getAtuendoDelDia() {
+    return atuendoDelDia;
+  }
+
+  public Usuario(List<Guardarropa> guardarropas, String correoElectronico) {
+    this.correoElectronico = correoElectronico;
     this.guardarropas = guardarropas;
   }
 

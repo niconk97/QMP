@@ -1,6 +1,8 @@
 package clima;
 
 import sugerenciadeatuendos.AlertaMeteorologica;
+import sugerenciadeatuendos.MailSender;
+import sugerenciadeatuendos.NotificationService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -70,20 +72,24 @@ public class GestorClima {
     return this.alertasMeteorologicas;
   }
 
-  public List<AlertaMeteorologica> actualizarAlertasMeteorologicas(String localizacion) {
+  public List<AlertaMeteorologica> actualizarAlertasMeteorologicas(String localizacion, List<String> correos) {
     List<AlertaMeteorologica> alertas = this.servicioClima.alertasDeLocalizacion(localizacion);
-    ejecutarAccionesDeAlertas(alertas);
+    ejecutarAccionesDeAlertas(alertas, correos);
     this.alertasMeteorologicas = alertas;
     return alertas;
   }
 
-  private void ejecutarAccionesDeAlertas(List<AlertaMeteorologica> alertasMeteorologicas) {
-
-    if(alertasMeteorologicas.contains(AlertaMeteorologica.TORMENTA)){
-      new AlertaTormenta().informar();
+  private void ejecutarAccionesDeAlertas(List<AlertaMeteorologica> alertasMeteorologicas, List<String> correos) {
+    MailSender servicioMail = new MailSender();
+    correos.forEach(c-> {servicioMail.send(c, "Alerta de ...");}); //enviar correo con la alerta meteorologica
+    if(alertasMeteorologicas.contains(AlertaMeteorologica.TORMENTA)) {
+      new NotificationService().notify("Alerta de Tormenta, lleva un Paraguas");
     }else if (alertasMeteorologicas.contains(AlertaMeteorologica.GRANIZO)) {
-      new AlertaGranizo().informar();
+      new NotificationService().notify("Alerta de Granizo, evitar salir en auto");
     }
   }
 
+  public List<String> recibirCorreos(List<String> correos) {
+    return correos;
+  }
 }
