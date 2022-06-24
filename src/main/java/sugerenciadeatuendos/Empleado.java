@@ -20,8 +20,7 @@ public class Empleado {
   }
 
   public void actualizarAlertas(GestorClima gestorClima, String loc){
-    gestorClima.actualizarAlertasMeteorologicas(loc, obtenerCorreoElectronico(usuarios));
-    //gestorClima.recibirCorreos(obtenerCorreoElectronico(usuarios));
+    gestorClima.actualizarAlertasMeteorologicas(loc);
     calcularSugerenciasDiarias();
   }
 
