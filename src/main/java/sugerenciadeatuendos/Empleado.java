@@ -1,9 +1,6 @@
 package sugerenciadeatuendos;
 
-import clima.GestorClima;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Empleado {
 
@@ -23,9 +20,9 @@ public class Empleado {
     registroAlertas.actualizarAlertasMeteorologicas(loc);
     calcularSugerenciasDiarias();
   }
-
+  /*
   public List<String> obtenerCorreoElectronico(List<Usuario> usuarios){
     return usuarios.stream().map(u -> u.getCorreoElectronico()).collect(Collectors.toList());
-  }
+  }*/
 
 }

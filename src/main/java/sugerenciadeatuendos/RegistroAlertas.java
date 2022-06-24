@@ -1,6 +1,5 @@
 package sugerenciadeatuendos;
 
-import clima.AccuWeatherAPIAdapter;
 import clima.GestorClima;
 
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ public class RegistroAlertas {
 
   private GestorClima gestorClima;
   private List<AlertaMeteorologica> alertasMeteorologicas = new ArrayList<>();
-  private List<AccionDeAlerta> accionesDeAlertas = new ArrayList<>();
+  private List<AccionDeAlerta> accionesDeAlertas;
 
   public RegistroAlertas(List<AccionDeAlerta> accionesDeAlertas, GestorClima gestorClima) {
     this.accionesDeAlertas = accionesDeAlertas;

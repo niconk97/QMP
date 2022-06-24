@@ -1,19 +1,18 @@
 package sugerenciadeatuendos;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Correo {
-  List<String> direcciones = new ArrayList<>();
+public class CorreosUsuarios {
+  List<String> direcciones;
 
   public List<String> getDirecciones() {
     return direcciones;
   }
 
-  public Correo(List<String> direcciones) {
+  public CorreosUsuarios(List<String> direcciones) {
     this.direcciones = direcciones;
   }
-
+  /*
   public void agregarDireccionDeCorreo(String direccion){
     this.direcciones.add(direccion);
   }
@@ -21,5 +20,5 @@ public class Correo {
   public void QuitarDireccionDeCorreo(String direccion){
     this.direcciones.remove(direccion);
   }
-
+  */
 }
